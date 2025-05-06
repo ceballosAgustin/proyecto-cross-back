@@ -62,4 +62,13 @@ public class Ejercicio {
         uniqueConstraints = {@UniqueConstraint(columnNames = {"id_ejercicio", "id_categoria"})})
     @JsonIgnoreProperties("ejercicios")
     private Set<CategoriaEjercicio> categorias;
+
+    @ManyToMany
+    @JoinTable(
+        name = "ejercicio_nivel_dificultad",
+        joinColumns = @JoinColumn(name = "id_ejercicio"),
+        inverseJoinColumns = @JoinColumn(name = "id_nivel"),
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"id_ejercicio", "id_nivel"})})
+    @JsonIgnoreProperties("ejercicios")
+    private Set<NivelDificultad> nivelesDificultad;
 }
