@@ -14,5 +14,5 @@ public interface IEjercicioService {
 
     public Ejercicio modificarEjercicio(Ejercicio ejercicio);
 
-    public Ejercicio borrarEjercicio(Long idEjercicio);
+    public void borrarEjercicio(Long idEjercicio);
 }
