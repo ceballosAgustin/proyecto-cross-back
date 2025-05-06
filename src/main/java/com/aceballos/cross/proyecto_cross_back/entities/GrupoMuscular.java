@@ -1,10 +1,15 @@
 package com.aceballos.cross.proyecto_cross_back.entities;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -28,4 +33,8 @@ public class GrupoMuscular {
     @Size(min = 3, max = 50, message = "El nombre debe tener entre 3 y 50 caracteres")
     @Column(nullable = false, unique = true)
     private String nombre;
+
+    @ManyToMany(mappedBy = "gruposMusculares")
+    @JsonIgnore
+    private Set<Ejercicio> ejercicios;
 }

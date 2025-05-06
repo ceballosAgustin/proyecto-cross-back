@@ -2,6 +2,8 @@ package com.aceballos.cross.proyecto_cross_back.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,5 +51,6 @@ public class Ejercicio {
         joinColumns = @JoinColumn(name = "id_ejercicio"),
         inverseJoinColumns = @JoinColumn(name = "id_grupo_muscular"),
         uniqueConstraints = {@UniqueConstraint(columnNames = {"id_ejercicio", "id_grupo_muscular"})})
+    @JsonIgnoreProperties("ejercicios")
     private Set<GrupoMuscular> gruposMusculares;
 }
