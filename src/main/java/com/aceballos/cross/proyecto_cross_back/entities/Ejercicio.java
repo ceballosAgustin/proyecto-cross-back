@@ -12,6 +12,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +30,13 @@ public class Ejercicio {
     @Column(name = "id_ejercicio")
     private Long idEjercicio;
 
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
     @Column(nullable = false, unique = true)
     private String nombre;
 
+    @NotBlank(message = "La descripción no puede estar vacía")
+    @Size(min = 10, max = 500, message = "La descripción debe tener entre 10 y 500 caracteres")
     @Column(nullable = false, unique = true)
     private String descripcion;
 
