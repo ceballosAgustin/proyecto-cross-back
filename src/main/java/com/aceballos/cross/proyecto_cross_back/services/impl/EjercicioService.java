@@ -14,17 +14,19 @@ import com.aceballos.cross.proyecto_cross_back.repositories.IEjercicioRepository
 import com.aceballos.cross.proyecto_cross_back.services.IEjercicioService;
 
 @Service
-public class EjercicioService implements IEjercicioService{
+public class EjercicioService implements IEjercicioService {
 
     @Autowired
     private IEjercicioRepository ejercicioRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Ejercicio> traerEjercicios() {
         return ejercicioRepository.findAll(); 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Ejercicio traerEjercicio(Long idEjercicio) {
         Optional<Ejercicio> ejercicioOptional = ejercicioRepository.findById(idEjercicio);
 
@@ -36,6 +38,7 @@ public class EjercicioService implements IEjercicioService{
     }
 
     @Override
+    @Transactional
     public Ejercicio crearEjercicio(Ejercicio ejercicio) {
         ejercicio.setNombre(ejercicio.getNombre().trim());
 
@@ -47,6 +50,7 @@ public class EjercicioService implements IEjercicioService{
     }
 
     @Override
+    @Transactional
     public Ejercicio modificarEjercicio(Ejercicio ejercicio) {
         Optional<Ejercicio> ejercicioOptional = ejercicioRepository.findById(ejercicio.getIdEjercicio());
 
@@ -55,10 +59,13 @@ public class EjercicioService implements IEjercicioService{
         }
         
         Ejercicio ejercicioModificar = ejercicioOptional.orElseThrow();
-        ejercicioModificar.setNombre(ejercicio.getNombre());
+        ejercicioModificar.setNombre(ejercicio.getNombre().trim());
         ejercicioModificar.setDescripcion(ejercicio.getDescripcion());
         ejercicioModificar.setUrlVideo(ejercicio.getUrlVideo());
         ejercicioModificar.setGruposMusculares(ejercicio.getGruposMusculares());
+        ejercicioModificar.setCategorias(ejercicio.getCategorias());
+        ejercicioModificar.setNivelesDificultad(ejercicio.getNivelesDificultad());
+        ejercicioModificar.setEquipamientos(ejercicio.getEquipamientos());
         
         return ejercicioRepository.save(ejercicioModificar);
     }

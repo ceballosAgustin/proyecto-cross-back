@@ -39,7 +39,7 @@ public class Ejercicio {
 
     @NotBlank(message = "La descripción no puede estar vacía")
     @Size(min = 10, max = 500, message = "La descripción debe tener entre 10 y 500 caracteres")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String descripcion;
 
     @Column(name = "url_video")
